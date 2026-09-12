@@ -1,0 +1,6 @@
+{
+  "name": "Lễ Thành Hôn: Trương Minh Cảnh & Nguyễn Đàm Thanh Nhi",
+  "description": "Trang web thiệp cưới online, đếm ngược thời gian, sự kiện Lễ Thành Hôn, album ảnh cưới, gửi lời chúc mừng và xác nhận tham dự (RSVP).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
