@@ -19,13 +19,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.2 # Cập nhật phiên bản bản vá mới nhất sử dụng Node 24
+        uses: actions/checkout@v4 # Giữ @v4, GitHub tự động trỏ về bản patch mới nhất hỗ trợ Node 24
 
       - name: Setup Node
-        uses: actions/setup-node@v4.2.0 # Cập nhật phiên bản bản vá mới nhất sử dụng Node 24
+        uses: actions/setup-node@v4 # Giữ @v4, tự động chạy Node 24 ngầm định
         with:
           node-version: "24"
-          cache: "npm" # Tự động cache node_modules giúp build nhanh hơn
+          cache: "npm" # Tự động cache node_modules giúp các lần deploy sau nhanh hơn
           
       - name: Install dependencies
         run: npm install
@@ -37,7 +37,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3.1.1 # Cập nhật bản vá hỗ trợ Node 24 thay vì v3 mặc định
+        uses: actions/upload-pages-artifact@v5 # Đã nâng cấp lên v5 mới nhất (hỗ trợ Node 24 hoàn toàn)
+        with:
+          path: ./dist
 
   deploy:
     environment:
@@ -48,4 +50,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4.0.5 # Cập nhật bản vá hỗ trợ Node 24 để đồng bộ đồng loạt
+        uses: actions/deploy-pages@v4 # Giữ nguyên v4 (đã tương thích với v5 của upload-pages-artifact)
