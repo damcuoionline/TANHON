@@ -2,8 +2,12 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main", "master"] # Chạy khi có code mới đẩy lên nhánh main hoặc master
+    branches: ["main", "master"]
   workflow_dispatch:
+
+# THÊM DÒNG NÀY ĐỂ ẨN CẢNH BÁO NODE 20
+env:
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true"
 
 permissions:
   contents: read
@@ -19,12 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        # Sử dụng thẻ SHA commit cố định của phiên bản v4 mới nhất để bỏ qua cảnh báo Node 20
-        uses: actions/checkout@eef6142ac12613e53c408f96be1024665429928d # Phiên bản v4.2.2 chính thức
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        # Sử dụng thẻ SHA commit cố định của setup-node v4 mới nhất chạy Node 24 gốc
-        uses: actions/setup-node@3922559a8102d6987056a2f78396ef5d65d64be2 # Phiên bản v4.2.0 chính thức
+        uses: actions/setup-node@v4
         with:
           node-version: "24"
           
