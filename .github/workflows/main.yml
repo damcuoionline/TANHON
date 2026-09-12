@@ -19,13 +19,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        # Sử dụng thẻ SHA commit cố định của phiên bản v4 mới nhất để bỏ qua cảnh báo Node 20
+        uses: actions/checkout@eef6142ac12613e53c408f96be1024665429928d # Phiên bản v4.2.2 chính thức
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        # Sử dụng thẻ SHA commit cố định của setup-node v4 mới nhất chạy Node 24 gốc
+        uses: actions/setup-node@3922559a8102d6987056a2f78396ef5d65d64be2 # Phiên bản v4.2.0 chính thức
         with:
           node-version: "24"
-          # Đã bỏ dòng cache: "npm" để tránh lỗi thiếu file lock
           
       - name: Install dependencies
         run: npm install
@@ -33,7 +34,6 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Dòng này sẽ lấy API Key từ Bước 1 bạn đã cài để đưa vào web
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           
       - name: Upload artifact
